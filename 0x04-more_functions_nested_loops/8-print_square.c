@@ -1,25 +1,26 @@
 #include "main.h"
-
 /**
- * print_square - prints a square, followed by a new line;
- * @size: size of the square
- */
+ * print_square- diagonal in my console
+ * @size:parameter
+ * Return: null
+*/
+
 void print_square(int size)
 {
-	if (size <= 0)
-	{
-		_putchar('\n');
-	} else
-	{
-		int i, j;
-
-		for (i = 0; i < size; i++)
-		{
-			for (j = 0; j < size; j++)
-			{
-				_putchar('#');
-			}
-			_putchar('\n');
-		}
-	}
+int a, b;
+if (size <= 0)
+{
+_putchar('\n');
+}
+else
+{
+for (a = 0 ; a < size ; a++)
+{
+for (b = 0 ; b < size ; b++)
+{
+_putchar(35);
+}
+_putchar('\n');
+}
+}
 }

@@ -8,7 +8,6 @@
  *
  * Return: void
  */
-
 void print_line(char *c, int s, int l)
 {
 int j, k;
@@ -29,7 +28,6 @@ else
 putchar('.');
 }
 }
-
 /**
  * print_buffer - prints a buffer
  * @b: buffer to print
@@ -56,3 +54,4 @@ putchar('\n');
 if (size == 0)
 putchar('\n');
 }
+

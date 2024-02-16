@@ -1,85 +1,61 @@
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 /**
- * _atoi - converts a string to an integer
- * @s: string to be converted
- *
- * Return: the int converted from the string
- */
-int _atoi(char *s)
+ * check_num- number
+ * @str: num
+ * Return: val
+*/
+
+int check_num(char *str)
 {
-	int i, d, n, len, f, digit;
+	unsigned int count;
 
-	i = 0;
-	d = 0;
-	n = 0;
-	len = 0;
-	f = 0;
-	digit = 0;
-
-	while (s[len] != '\0')
-		len++;
-
-	while (i < len && f == 0)
+	count = 0;
+	while (count < strlen(str))
 	{
-		if (s[i] == '-')
-			++d;
-
-		if (s[i] >= '0' && s[i] <= '9')
+		if (!isdigit(str[count]))
 		{
-			digit = s[i] - '0';
-			if (d % 2)
-				digit = -digit;
-			n = n * 10 + digit;
-			f = 1;
-			if (s[i + 1] < '0' || s[i + 1] > '9')
-				break;
-			f = 0;
+			return (0);
 		}
-		i++;
+	count++;
 	}
 
-	if (f == 0)
-		return (0);
-
-	return (n);
+	return (1);
 }
 
 /**
- * main - adds two positive number
- * @argc: number of arguments
- * @argv: array of arguents
- *
- * Return: 0 (Success), or 1 (Success)
- */
+ * main- main func
+ * @argc: par
+ * @argv: par
+ *Return: val
+*/
+
 int main(int argc, char *argv[])
 {
-	int sum, num, i, j, k;
+	int count, sum = 0, str;
 
-	sum = 0;
-
-	for (i = 1; i < argc; i++)
+	count = 1;
+	while (count < argc)
 	{
-		for (j = 0; argv[i][j] != '\0'; j++)
+		if (check_num(argv[count]))
 		{
-			if (argv[i][j] > '9' || argv[i][j] < '0')
-			{
-				puts("Error");
-				return (1);
-			}
+			str = atoi(argv[count]);
+			sum += str;
 		}
-	}
-
-	for (k = 1; k < argc; k++)
-	{
-		num = _atoi(argv[k]);
-		if (num >= 0)
+		else
 		{
-			sum += num;
+			puts("Error");
+			return (1);
 		}
+	count++;
 	}
 
 	printf("%d\n", sum);
+
 	return (0);
 }
+

@@ -1,36 +1,57 @@
 #include "lists.h"
-/**
- * print_listint_safe - function that prints a linked list with a loop safely.
- * @head: pointer to the 1st node of the linked list
- * Return: new_node
- */
-size_t print_listint_safe(const listint_t *head)
-{
-	const listint_t *tmp_n = NULL;
-	const listint_t *l_n = NULL;
-	size_t counter = 0;
-	size_t new_n;
+#include <stdio.h>
 
-	tmp_n = head;
-	while (tmp_n)
+size_t looped_listint_len(const listint_t *head);
+size_t print_listint_safe(const listint_t *head);
+
+/**
+ * looped_listint_len - Counts the number of unique nodes
+ *                      in a looped listint_t linked list.
+ * @head: A pointer to the head of the listint_t to check.
+ *
+ * Return: If the list is not looped - 0.
+ *         Otherwise - the number of unique nodes in the list.
+ */
+size_t looped_listint_len(const listint_t *head)
+{
+	const listint_t *tortoise, *hare;
+	size_t nodes = 1;
+
+	if (head == NULL || head->next == NULL)
+		return (0);
+
+	tortoise = head->next;
+	hare = (head->next)->next;
+
+	while (hare)
 	{
-		printf("[%p] %d\n", (void *)tmp_n, tmp_n->n);
-		counter++;
-		tmp_n = tmp_n->next;
-		l_n = head;
-		new_n = 0;
-		while (new_n < counter)
+		if (tortoise == hare)
 		{
-			if (tmp_n == l_n)
+			tortoise = head;
+			while (tortoise != hare)
 			{
-				printf("-> [%p] %d\n", (void *)tmp_n, tmp_n->n);
-				return (counter);
+				nodes++;
+				tortoise = tortoise->next;
+				hare = hare->next;
 			}
-			l_n = l_n->next;
-			new_n++;
+
+			tortoise = tortoise->next;
+			while (tortoise != hare)
+			{
+				nodes++;
+				tortoise = tortoise->next;
+			}
+
+			return (nodes);
 		}
-		if (!head)
-			exit(98);
+
+		tortoise = tortoise->next;
+		hare = (hare->next)->next;
 	}
-	return (counter);
+
+	return (0);
 }
+
+/**
+ * print_listint_safe -
+
